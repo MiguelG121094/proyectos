@@ -1,0 +1,6 @@
+com\mycompany\crud\mvc\resources\JavaEE8Resource.class
+Conexion\conexion.class
+com\mycompany\crud\mvc\JAXRSConfiguration.class
+Controlador\personaDTO.class
+Conexion\gbl.class
+Modelo\personaDAO.class
