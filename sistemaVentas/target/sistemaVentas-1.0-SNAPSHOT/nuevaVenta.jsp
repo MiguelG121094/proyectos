@@ -247,7 +247,7 @@
                                 <div class="form-group">
                                     <label>Datos del Cliente</label>
                                 </div>
-                                <form name="formDatosCliente" action="" method="POST">
+                                <form name="formDatosCliente" action="ventaDTO?accion=agregar" method="POST">
                                     <div class="form-group d-flex">
                                         <div class="col-sm-6 d-flex">
                                             <a href="clienteDTO?accion=listar" data-bs-toggle="modal" data-bs-target="#modalCliente" class="btn btn-outline-primary">Buscar Cliente</a>

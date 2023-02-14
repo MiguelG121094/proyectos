@@ -186,7 +186,7 @@
                                 <div class="form-group">
                                     <label>Datos del Producto</label>
                                 </div>
-                                <form name="formDatosProducto" action="ventaDTO?accion=agregarDatos_DetVenta" method="POST">
+                                <form name="formDatosProducto" action="ventaDTO?accion=agregarDatos" method="POST">
                                     <div class="form-group d-flex">
                                         <div class="col-sm-6 d-flex">
                                             <a href="productoDTO?accion=listar" data-bs-toggle="modal" data-bs-target="#modalProducto" class="btn btn-outline-primary">Buscar Producto</a>

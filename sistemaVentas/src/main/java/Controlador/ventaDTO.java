@@ -5,11 +5,15 @@
 package Controlador;
 
 import Modelo.clienteDAO;
+import Modelo.empleadoDAO;
 import Modelo.productoDAO;
 import Modelo.ventaDAO;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -41,11 +45,12 @@ public class ventaDTO extends HttpServlet {
             ResultSet rs2;
             ResultSet rs3;
             ResultSet rs4;
-            
+
             ventaDAO dao = new ventaDAO();
             clienteDAO daoCliente = new clienteDAO();
             productoDAO daoProducto = new productoDAO();
-            
+            empleadoDAO daoEmpleado = new empleadoDAO();
+
             if (accion.equalsIgnoreCase("listar")) {
                 rs = daoCliente.cargaCliente();
                 rs2 = daoProducto.cargaProducto();
@@ -54,30 +59,28 @@ public class ventaDTO extends HttpServlet {
 //                rs3 = daoCliente.cargaCliente_id();
 //                request.setAttribute("datosCliente_id", rs3);
                 request.getRequestDispatcher("generarVenta.jsp").forward(request, response);
-                
+
             } else if (accion.equalsIgnoreCase("listarProducto")) {
                 rs = daoProducto.cargaProducto();
                 request.setAttribute("datosProducto", rs);
-                
-                
+
             } else if (accion.equalsIgnoreCase("cargar_cliente")) {
                 int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
                 daoCliente.setId_cliente(id_cliente);
                 rs3 = daoCliente.cargaCliente_id();
-                
-                
+
                 rs = daoCliente.cargaCliente();
                 rs2 = daoProducto.cargaProducto();
                 request.setAttribute("datosCliente", rs);
                 request.setAttribute("datosProducto", rs2);
                 request.setAttribute("datosCliente_id", rs3);
                 request.getRequestDispatcher("nuevaVenta.jsp").forward(request, response);
-                
+
             } else if (accion.equalsIgnoreCase("cargar_producto")) {
                 int id_producto = Integer.parseInt(request.getParameter("id_producto"));
                 daoProducto.setId_producto(id_producto);
                 rs4 = daoProducto.cargaProducto_id();
-                
+
                 rs = daoCliente.cargaCliente();
                 rs2 = daoProducto.cargaProducto();
                 //rs3 = daoCliente.cargaCliente_id();
@@ -86,54 +89,70 @@ public class ventaDTO extends HttpServlet {
                 //request.setAttribute("datosCliente_id", rs3);
                 request.setAttribute("datosProducto_id", rs4);
                 request.getRequestDispatcher("generarVenta.jsp").forward(request, response);
+
+            } else if (accion.equalsIgnoreCase("agregarDatos_CabVenta")) {
+                int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
+                String usuario = request.getParameter("usuario");
                 
+                int id_empleado = 0;
+                
+                daoEmpleado.setUsuario(usuario);
+                rs = daoEmpleado.obtenerId_empleado_user();
+                while (rs.next()) {
+                    id_empleado = rs.getInt("id_empleado");
+                }
+                
+                Date fecha = new Date();
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                dao.setFecha_venta(dateFormat.format(fecha));
+                dao.setId_cliente(id_cliente);
+                dao.setId_empleado(id_empleado);
+                //dao.insertarDatos_cabVenta();
+                
+                response.sendRedirect("ventaDTO?accion=listar");
+
             } else if (accion.equalsIgnoreCase("agregarDatos_DetVenta")) {
                 int id_producto = Integer.parseInt(request.getParameter("txtidProducto"));
                 int precio_venta = Integer.parseInt(request.getParameter("txtprecio_venta"));
-                String cantidad = request.getParameter("txtcantidad");
+                int cantidad = Integer.parseInt(request.getParameter("txtcantidad"));
                 System.out.println(id_producto);
                 System.out.println(precio_venta);
                 System.out.println(cantidad);
-                
+
                 ResultSet rs5 = dao.ultimoId_cab_venta();
                 int ultimoId_cab_venta = 0;
                 dao.setId_empleado(ultimoId_cab_venta);
-                
+
                 try {
                     while (rs5.next()) {
-                    ultimoId_cab_venta = rs5.getInt("id_cab_venta");
-                    System.out.println("Dentro Try: El valor de id cab venta es: " + ultimoId_cab_venta);
-                    break;
-                }
+                        ultimoId_cab_venta = rs5.getInt("id_cab_venta");
+                        System.out.println("Dentro Try: El valor del ultimo id cab venta es: " + ultimoId_cab_venta);
+                        break;
+                    }
                 } catch (SQLException ex) {
-                    System.out.println("Error: "+ex);
+                    System.out.println("Error: " + ex);
                 }
-                
-                System.out.println(" Fuera del try cath: El valor de id cab venta es: " + ultimoId_cab_venta);
-                
-                
-            } else if (accion.equalsIgnoreCase("eliminar")) {
-                
-                
-                
-                
+
+            } else if (accion.equalsIgnoreCase("agregarDatos")) {
+
+                response.sendRedirect("ventaDTO?accion=listar");
+
             } else if (accion.equalsIgnoreCase("eliminarProducto")) {
+
                 
                 
-                
-            }else if (accion.equalsIgnoreCase("editar_listar")) { 
-                
+            } else if (accion.equalsIgnoreCase("editar_listar")) {
+
                 
                 
             } else if (accion.equalsIgnoreCase("editar")) {
-                
+
                 
                 
             }
-            
-            
+
         } catch (IOException | NumberFormatException | ServletException e) {
-            System.out.println("Error: "+e);
+            System.out.println("Error: " + e);
         }
     }
 
