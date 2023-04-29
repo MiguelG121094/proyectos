@@ -4,6 +4,7 @@
     Author     : Miguel
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="ISO-8859-1"%>
@@ -116,7 +117,7 @@
                 <!-- Button trigger modal -->
                 <div class="container">
                     <a href="ventaDTO?accion=listarCliente" data-bs-toggle="modal" data-bs-target="#modalCliente" class="btn btn-outline-primary">Clientes</a>
-                    <a href="ventaDTO?accion=listarProducto" data-bs-toggle="modal" data-bs-target="#modalProducto" class="btn btn-outline-primary">Productos</a>
+                    <a href="ventaDTO?accion=listar" data-bs-toggle="modal" data-bs-target="#modalProducto" class="btn btn-outline-primary">Productos</a>
                 </div>
 
 
@@ -186,7 +187,7 @@
                                 <div class="form-group">
                                     <label>Datos del Producto</label>
                                 </div>
-                                <form name="formDatosProducto" action="ventaDTO?accion=agregarDatos" method="POST">
+                                <form name="formDatosProducto" action="ventaDTO?accion=agregarDatos_DetVenta" method="POST">
                                     <div class="form-group d-flex">
                                         <div class="col-sm-6 d-flex">
                                             <a href="productoDTO?accion=listar" data-bs-toggle="modal" data-bs-target="#modalProducto" class="btn btn-outline-primary">Buscar Producto</a>
@@ -232,7 +233,7 @@
                             <div class="card-body">
                                 <div class="d-flex col-sm-5 ml-auto">
                                     <label>Id.Venta:</label>
-                                    <input type="text" name="id_venta" class="form-control">
+                                    <input type="text" name="id_venta" value="" class="form-control">
                                 </div>
                                 <br>
                                 <table class="table table-bordered table-striped">
@@ -248,8 +249,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <c:forEach var="list" items="${lista}">
                                         <tr>
-                                            <td class="text-center"></td>
+                                            <td class="text-center">${list.getItem()}</td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
                                             <td class="text-center"></td>
@@ -260,6 +262,7 @@
                                                 <a href="" class="btn btn-danger" >Eliminar</a>
                                             </td>
                                         </tr>
+                                        </c:forEach>
                                     </tbody>
                                 </table>
                             </div>

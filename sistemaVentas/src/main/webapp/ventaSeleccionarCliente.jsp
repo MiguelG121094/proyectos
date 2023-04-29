@@ -146,7 +146,7 @@
                                         <td class="text-center"><%= rs.getString("telefono")%></td>
                                         <td class="text-center"><%= rs.getString("ruc")%></td>
                                         <td class="text-center">
-                                            <a href="ventasDTO?id_cliente=<%= rs.getInt("id_cliente") %>&usuario=<%= elUsuario%>&accion=agregarDatos_CabVenta" class="btn btn-primary">Seleccionar</a>
+                                            <a href="ventaDTO?id_cliente=<%= rs.getInt("id_cliente") %>&usuario=<%= elUsuario%>&accion=agregarDatos_CabVenta" class="btn btn-primary">Seleccionar</a>
                                         </td>
                                     </tr>
                                     <%

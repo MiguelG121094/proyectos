@@ -58,8 +58,6 @@ public class controladorDTO extends HttpServlet {
                         sesion.setAttribute("usuario", usuario);
                         
                         response.sendRedirect("menuPrincipal.jsp");
-
-                        //request.getRequestDispatcher("menuPrincipal.jsp").forward(request, response);
                     }else{
                         //error
                         response.sendRedirect("error.jsp");

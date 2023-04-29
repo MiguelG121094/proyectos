@@ -7,13 +7,16 @@ package Controlador;
 import Modelo.clienteDAO;
 import Modelo.empleadoDAO;
 import Modelo.productoDAO;
+import Modelo.venta;
 import Modelo.ventaDAO;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -45,6 +48,15 @@ public class ventaDTO extends HttpServlet {
             ResultSet rs2;
             ResultSet rs3;
             ResultSet rs4;
+            
+            venta v = new venta();
+            List<venta>lista = new ArrayList<>();
+            int item = 0;
+            int cod;
+            String descripcion;
+            int precio;
+            int cant;
+            int subtotal;
 
             ventaDAO dao = new ventaDAO();
             clienteDAO daoCliente = new clienteDAO();
@@ -59,10 +71,6 @@ public class ventaDTO extends HttpServlet {
 //                rs3 = daoCliente.cargaCliente_id();
 //                request.setAttribute("datosCliente_id", rs3);
                 request.getRequestDispatcher("generarVenta.jsp").forward(request, response);
-
-            } else if (accion.equalsIgnoreCase("listarProducto")) {
-                rs = daoProducto.cargaProducto();
-                request.setAttribute("datosProducto", rs);
 
             } else if (accion.equalsIgnoreCase("cargar_cliente")) {
                 int id_cliente = Integer.parseInt(request.getParameter("id_cliente"));
@@ -113,25 +121,48 @@ public class ventaDTO extends HttpServlet {
 
             } else if (accion.equalsIgnoreCase("agregarDatos_DetVenta")) {
                 int id_producto = Integer.parseInt(request.getParameter("txtidProducto"));
+                //String descripcion = request.getParameter("txtdescripcion");
                 int precio_venta = Integer.parseInt(request.getParameter("txtprecio_venta"));
                 int cantidad = Integer.parseInt(request.getParameter("txtcantidad"));
                 System.out.println(id_producto);
+                //System.out.println(descripcion);
                 System.out.println(precio_venta);
                 System.out.println(cantidad);
 
                 ResultSet rs5 = dao.ultimoId_cab_venta();
-                int ultimoId_cab_venta = 0;
-                dao.setId_empleado(ultimoId_cab_venta);
+                int ultimoId_cab_venta;
+                //dao.setId_empleado(ultimoId_cab_venta);
 
                 try {
                     while (rs5.next()) {
                         ultimoId_cab_venta = rs5.getInt("id_cab_venta");
                         System.out.println("Dentro Try: El valor del ultimo id cab venta es: " + ultimoId_cab_venta);
+                            //request.setAttribute("idVenta", ultimoId_cab_venta);
                         break;
                     }
                 } catch (SQLException ex) {
                     System.out.println("Error: " + ex);
                 }
+                
+                //response.sendRedirect("ventaDTO?accion=listar");
+                
+                
+                
+                item = item+1;
+                cod = Integer.parseInt(request.getParameter("txtidProducto"));
+                descripcion = request.getParameter("txtdescripcion");
+                precio = Integer.parseInt(request.getParameter("txtprecio_venta"));
+                cant = Integer.parseInt(request.getParameter("txtcantidad"));
+                subtotal = precio*cant;
+                v.setItem(item);
+                v.setId_producto(cod);
+                v.setDescripcion(descripcion);
+                v.setPrecio(precio);
+                v.setCantidad(cant);
+                v.setSubTotal(subtotal);
+                lista.add(v);
+                request.setAttribute("lista", lista);
+                
 
             } else if (accion.equalsIgnoreCase("agregarDatos")) {
 
