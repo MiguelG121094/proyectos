@@ -4,6 +4,7 @@
     Author     : Miguel
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -65,6 +66,12 @@
                     <form method="POST" class="dropdown-item" action="validar">
                         <li><center><button class="btn btn-danger center-block" type="submit" name="accion" value="Salir">Cerrar Sesion</button></center></li>
                     </form>
+                    <%
+                      response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+                      if(session.getAttribute("empleado") == null){
+                      response.sendRedirect("index.jsp");
+                        }  
+                    %>
                     </ul>
                     </li>
                 </div>

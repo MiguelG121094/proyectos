@@ -47,7 +47,7 @@
                                             <ion-icon name="cash-outline"></ion-icon></span></strong></h1>
                             </div>
                             <div class="card-footer">
-                                <a class="text-white" href="">Realizar una venta <i class="fa-solid fa-circle-arrow-right"></i></a>
+                                <a class="text-white" href="Controlador?menu=RegistrarVenta&accion=ListarModal&nuevaV=1" target="miContenedor">Realizar Venta <i class="fa-solid fa-circle-arrow-right"></i></a>
                             </div>
                         </div>
                     </div>
@@ -89,10 +89,10 @@
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-solid fa-cash-register"></i>
-                                Ultimas Ventas realizadas
+                                <h5><i class="fa-solid fa-cash-register"></i>
+                                Últimas Ventas realizadas</h5>
                             </div>
-                            <div class=""><canvas width="100%" height="40"></canvas>
+                            <div class=""><canvas width="100%" height="0"></canvas>
 
                                 <table class="table table-bordered table-striped">
                                     <thead>
@@ -124,8 +124,8 @@
                     <div class="col-xl-6">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fa-solid fa-box-open"></i>
-                                Ultimas Compras realizadas
+                                <h5><i class="fa-solid fa-box-open"></i>
+                                Últimas Compras realizadas</h5>
                             </div>
                             <div class="card-body"><canvas width="100%" height="40"></canvas></div>
                         </div>
@@ -134,9 +134,7 @@
             </div>
 
             <div>
-                <div class="container-fluid px-4 text-center">
-                    <a href="agregarPersona.jsp"><img src="img/addNew.jpg" alt=""/></a>
-                </div>
+                
             </div>
         </div>
 

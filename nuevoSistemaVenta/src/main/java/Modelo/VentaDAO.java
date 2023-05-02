@@ -74,7 +74,14 @@ public class VentaDAO {
     }
 
     public List listarVentas() {
-        String sql = "SELECT a.`id_cab_venta`, b.`nombre` AS nombreCliente, GROUP_CONCAT(DISTINCT d.`descripcion`) AS descriProducto, c.`precio_venta` * c.`cantidad` AS subtotal, a.`fecha_venta` AS fechaVenta FROM `cabecera_venta` a JOIN `cliente` b ON a.`id_cliente` = b.`id_cliente` JOIN `detalle_venta` c ON c.`id_cab_venta` = c.`id_cab_venta` JOIN `producto` d ON c.`id_producto` = d.`id_producto` WHERE a.`id_cab_venta` = c.`id_cab_venta` GROUP BY a.`id_cab_venta`,c.`id_cab_venta` ORDER BY a.`id_cab_venta` DESC LIMIT 0, 5;";
+        String sql = "SELECT a.`id_cab_venta`, b.`nombre` AS nombreCliente, GROUP_CONCAT(DISTINCT d.`descripcion`) AS descriProducto,\n"
+                + "SUM(c.`precio_venta` * c.`cantidad`) AS subtotal, a.`fecha_venta` AS fechaVenta FROM `cabecera_venta` a \n"
+                + "JOIN `cliente` b ON a.`id_cliente` = b.`id_cliente` \n"
+                + "JOIN `detalle_venta` c ON c.`id_cab_venta` = c.`id_cab_venta` \n"
+                + "JOIN `producto` d ON c.`id_producto` = d.`id_producto` \n"
+                + "WHERE a.`id_cab_venta` = c.`id_cab_venta` \n"
+                + "GROUP BY a.`id_cab_venta`,c.`id_cab_venta` \n"
+                + "ORDER BY a.`id_cab_venta` DESC LIMIT 0, 5;";
         List<Venta> lista = new ArrayList<>();
         try {
             con = cn.Conexion();
@@ -89,12 +96,10 @@ public class VentaDAO {
                 v.setFecha(rs.getString(5));
                 //String[] value = new String[]{rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)};
                 lista.add(v);
-                System.out.println(lista);
-                
+
             }
         } catch (Exception e) {
         }
-        System.out.println(lista);
         return lista;
     }
 

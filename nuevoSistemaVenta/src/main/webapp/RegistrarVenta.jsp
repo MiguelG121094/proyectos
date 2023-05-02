@@ -168,7 +168,8 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <button type="submit" name="accion" value="Agregar" class="btn btn-outline-success">Agregar Producto</button>
+                                <button type="submit" name="accion" value="Agregar" class="btn btn-outline-success"
+                                <c:if test="${product.getPrecio_venta() == null}"><c:out value="disabled='disabled'"/></c:if>">Agregar Producto</button>
                             </div>
                         </div>
                     </form>
@@ -212,17 +213,35 @@
                             </tbody>
                         </table>
                     </div>
+                        <form action="Controlador?menu=RegistrarVenta" method="POST">
                     <div class="card-footer d-flex">
                         <div class="col-sm-6">
-                            <a href="Controlador?menu=RegistrarVenta&accion=GenerarVenta&id=${empleado.getNombre()}" class="btn btn-success">Generar Venta</a>
+                            <button id="btnGenrerarVenta" class="btn btn-success" type="submit" name="accion" value="GenerarVenta" class=""
+                            <c:if test="${totalpagar == 0 || lista == null}"><c:out value="disabled='disabled'"/></c:if>">Generar Venta</button>
+                            
                             <a href="Controlador?menu=RegistrarVenta&accion=ListarModal&nuevaV=1" class="btn btn-danger">Cancelar</a>
-                        </div>
+                        </div>                            
                         <div class="d-flex col-sm-3 ml-auto">
                             <label>Total a pagar: </label><input type="text" style="font-weight: bold" readonly="true" name="txttotal" value="Gs. ${totalpagar}" class="form-control" placeholder="Total a pagar">
                         </div>
                     </div>
+                        </form>
                 </div>
+                        <c:if test="${mensaje == 0}">
+                            <div id="mensaje" class="alert alert-success" style="text-align: center" role="alert">
+                        Venta generada
+                        <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                    </div>
+                    </c:if>
+                        <script>
+                            setTimeout("document.getElementById('mensaje').style.visibility='hidden'",3000);
+                        </script>
+                        <div id="mensaje" style="display: none; text-align: center" class="alert alert-success" role="alert">
+                            Venta generada
+                            <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                        </div>
             </div>
+                        
         </div>
 
 

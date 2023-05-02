@@ -3,7 +3,7 @@
     Created on : 23/02/2023, 08:10:14 PM
     Author     : Miguel
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -35,9 +35,17 @@
                             <label>Contraseña</label>
                             <input type="password" name="txtclave" class="form-control" required="true" placeholder="Ingrese su Contraseña">
                         </div>
-                        
-                        <button type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-block">Ingresar</button>
+                        <button id="btnIngresar" type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-block">Ingresar</button>
                     </form>
+                    <c:if test="${mensaje == 0}">
+                        <div id="mensaje" class="alert alert-danger" style="text-align: center" role="alert">
+                        Usuario o contraseña incorrecta
+                        <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                    </div>
+                    </c:if>
+                        <script>
+                            setTimeout("document.getElementById('mensaje').style.visibility='hidden'",5000);
+                        </script>
                 </div>
             </div>
         </div>

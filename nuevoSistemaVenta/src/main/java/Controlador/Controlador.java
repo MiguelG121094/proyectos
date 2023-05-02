@@ -64,6 +64,13 @@ public class Controlador extends HttpServlet {
         String accion = request.getParameter("accion");
         if (menu.equalsIgnoreCase("Principal")) {
             request.getRequestDispatcher("Principal.jsp").forward(request, response);
+            switch (accion) {
+                case "ListarVentas":
+                    List lista = vdao.listarVentas();
+                    request.setAttribute("listaVenta", lista);
+                    break;
+            }
+            request.getRequestDispatcher("MenuPrincipal.jsp").forward(request, response);
         }
 
         if (menu.equals("Empleado")) {
@@ -390,6 +397,9 @@ public class Controlador extends HttpServlet {
                     DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                     v.setFecha(dateFormat.format(fecha));
                     v.setId_cliente(id_c);
+                    Empleado em= new Empleado();
+                    em = (Empleado)request.getSession().getAttribute("empleado");
+                    id_em = em.getId();
                     v.setId_empleado(id_em);
                     v.setEstado("A");
                     vdao.guardarCab_Venta(v);
@@ -402,10 +412,10 @@ public class Controlador extends HttpServlet {
                         v.setPrecio(listaVenta.get(i).getPrecio());
                         v.setCantidad(listaVenta.get(i).getCantidad());
                         v.setId_producto(listaVenta.get(i).getId_producto());
-                        //vdao.guardarDet_Venta(v);
+                        vdao.guardarDet_Venta(v);
                         
                     }
-                    
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=RegistrarVenta&accion=ListarModal").forward(request, response);
 
                     break;
@@ -436,7 +446,6 @@ public class Controlador extends HttpServlet {
             switch (accion) {
                 case "ListarVentas":
                     List lista = vdao.listarVentas();
-                    System.out.println(lista);
                     request.setAttribute("listaVenta", lista);
                     break;
             }

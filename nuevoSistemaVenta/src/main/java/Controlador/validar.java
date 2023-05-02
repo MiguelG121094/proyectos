@@ -21,7 +21,7 @@ public class validar extends HttpServlet {
 
     EmpleadoDAO edao = new EmpleadoDAO();
     Empleado em = new Empleado();
-    
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -30,7 +30,7 @@ public class validar extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Validar</title>");            
+            out.println("<title>Servlet Validar</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet Validar at " + request.getContextPath() + "</h1>");
@@ -65,20 +65,26 @@ public class validar extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String  accion = request.getParameter("accion");
+
+        String accion = request.getParameter("accion");
         if (accion.equalsIgnoreCase("Ingresar")) {
             String usuario = request.getParameter("txtusuario");
             String clave = request.getParameter("txtclave");
             em = edao.validar(usuario, clave);
             if (em.getUsuario() != null) {
-                request.setAttribute("empleado", em);
-                request.getRequestDispatcher("Controlador?menu=Principal").forward(request, response);
-            }else{
+                request.getSession().setAttribute("empleado", em);
+                response.sendRedirect("Controlador?menu=Principal&accion=ListarVentas");
+            } else {
+                request.setAttribute("mensaje", 0);
                 request.getRequestDispatcher("index.jsp").forward(request, response);
             }
-        }else{
+        }
+        if (accion.equalsIgnoreCase("salir")) {
+            request.getSession().removeAttribute("Ingresar");
+            request.getSession().invalidate();
             request.getRequestDispatcher("index.jsp").forward(request, response);
+        }else{
+            //request.getRequestDispatcher("index.jsp").forward(request, response);
         }
     }
 
