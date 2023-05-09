@@ -53,14 +53,22 @@
                         </div>
                         <div class="mb-3">
                             <label for="txtclave" class="form-label">Clave</label>
-                            <input type="password" class="form-control" id="txtclave" name="txtclave" value="${emp.getClave()}" required="true">
+                            <input type="password" class="form-control" id="txtclave" name="txtclave" required="true" value="${emp.getClave()}">
                         </div>
+                        <div class="mb-3">
+                            <label for="txtclaveConfirm" class="form-label">Confirmar Clave</label>
+                            <input type="password" class="form-control" id="txtclaveConfirm" name="txtclaveConfirm" required="true">
+                        </div>
+                         
+                            
 
                         <button type="submit" name="accion" value="Insertar" class="btn btn-success"
                                 <c:if test="${emp.getNombre() != null}"><c:out value="disabled='disabled'"/></c:if>">Agregar</button>
 
                         <button type="submit" name="accion" value="Actualizar" class="btn btn-primary" 
                                 <c:if test="${emp.getNombre() == null}"><c:out value="disabled='disabled'"/></c:if>">Actualizar</button>
+                                
+                        <a href="Controlador?menu=Empleado&accion=Cancelar" class="btn btn-danger">Cancelar</a>
 
                         </form>
                     </div>
@@ -102,6 +110,27 @@
             </div>
 
         </div>
+                                <c:if test="${mensaje == 0}">
+                                <div id="mensaje" class="alert alert-success" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Procesado correctamente
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
+                            <script>
+                                setTimeout("document.getElementById('mensaje').style.visibility='hidden'",3000);
+                            </script>
+                            <c:if test="${mensaje == 1}">
+                                <div id="mensaje" class="alert alert-danger" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Eliminado correctamente
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
+                            <c:if test="${mensaje == 2}">
+                                <div id="mensaje" class="alert alert-danger" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Contraseñas no coinciden
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

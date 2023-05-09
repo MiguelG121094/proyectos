@@ -50,6 +50,7 @@
                         <button type="submit" name="accion" value="Actualizar" class="btn btn-primary" 
                                 <c:if test="${product.getDescripcion() == null}"><c:out value="disabled='disabled'"/></c:if>">Actualizar</button>
 
+                        <a href="Controlador?menu=Producto&accion=Cancelar" class="btn btn-danger">Cancelar</a>
                         </form>
                     </div>
                 </div>
@@ -86,6 +87,21 @@
             </div>
 
         </div>
+                                <c:if test="${mensaje == 0}">
+                                <div id="mensaje" class="alert alert-success" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Procesado correctamente
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
+                            <script>
+                                setTimeout("document.getElementById('mensaje').style.visibility='hidden'",3000);
+                            </script>
+                            <c:if test="${mensaje == 1}">
+                                <div id="mensaje" class="alert alert-danger" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Eliminado correctamente
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
         
         
         

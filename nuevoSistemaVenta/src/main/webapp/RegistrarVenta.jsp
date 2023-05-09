@@ -38,7 +38,7 @@
                     </div>
                     <div class="modal-body">
 
-                        <table class="table table-bordered table-striped">
+                        <table id="tablaCliente" class="table table-bordered table-striped">
                             <thead>
                                 <tr class="bg-dark">
                                     <th class="text-center text-light">Id</th>
@@ -206,7 +206,7 @@
                                         <td class="text-center">${list.getSubTotal()}</td>
                                         <td class="text-center">
                                             <!--<a href="" class="btn btn-warning">Editar</a>-->
-                                            <a href="Controlador?menu=RegistrarVenta&accion=Eliminar" class="btn btn-danger">Eliminar</a>
+                                            <a href="Controlador?menu=RegistrarVenta&accion=Eliminar&item=${list.getItem()}" class="btn btn-danger">Eliminar</a>
                                         </td>
                                     </tr>
                                 </c:forEach>
@@ -227,25 +227,24 @@
                     </div>
                         </form>
                 </div>
-                        <c:if test="${mensaje == 0}">
-                            <div id="mensaje" class="alert alert-success" style="text-align: center" role="alert">
-                        Venta generada
-                        <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
-                    </div>
-                    </c:if>
-                        <script>
-                            setTimeout("document.getElementById('mensaje').style.visibility='hidden'",3000);
-                        </script>
-                        <div id="mensaje" style="display: none; text-align: center" class="alert alert-success" role="alert">
-                            Venta generada
-                            <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
-                        </div>
             </div>
                         
         </div>
-
-
-
+                            <c:if test="${mensaje == 0}">
+                                <div id="mensaje" class="alert alert-success" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    Venta generada correctamente
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-success btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
+                            <c:if test="${mensaje == 1}">
+                                <div id="mensaje" class="alert alert-danger" style="position:absolute; top: 12px; right: 10px;"" role="alert">
+                                    No hay suficiente stock
+                                    <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
+                                </div>
+                            </c:if>
+                            <script>
+                                setTimeout("document.getElementById('mensaje').style.visibility='hidden'",3000);
+                            </script>
 
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

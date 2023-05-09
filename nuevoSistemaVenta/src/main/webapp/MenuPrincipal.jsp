@@ -100,7 +100,7 @@
                                             <th class="text-center text-light">Id. Venta</th>
                                             <th class="text-center text-light">Cliente</th>
                                             <th class="text-center text-light">Producto</th>
-                                            <th class="text-center text-light">SubTotal</th>
+                                            <th class="text-center text-light">Total</th>
                                             <th class="text-center text-light">Fecha</th>
                                         </tr>
                                     </thead>

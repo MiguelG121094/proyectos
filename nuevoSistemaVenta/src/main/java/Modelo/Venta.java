@@ -23,11 +23,12 @@ public class Venta {
     Integer subTotal;
     Integer monto;
     String estado;
+    int stockActual;
 
     public Venta() {
     }
 
-    public Venta(Integer id, Integer item, Integer id_cliente, String nombre_cliente, Integer id_empleado, Integer id_producto, Integer id_venta, String descripcion, String fecha, Integer precio, Integer cantidad, Integer subTotal, Integer monto, String estado) {
+    public Venta(Integer id, Integer item, Integer id_cliente, String nombre_cliente, Integer id_empleado, Integer id_producto, Integer id_venta, String descripcion, String fecha, Integer precio, Integer cantidad, Integer subTotal, Integer monto, String estado, int stockActual) {
         this.id = id;
         this.item = item;
         this.id_cliente = id_cliente;
@@ -42,6 +43,7 @@ public class Venta {
         this.subTotal = subTotal;
         this.monto = monto;
         this.estado = estado;
+        this.stockActual = stockActual;
     }
 
     public Integer getId() {
@@ -154,6 +156,14 @@ public class Venta {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public int getStockActual() {
+        return stockActual;
+    }
+
+    public void setStockActual(int stockActual) {
+        this.stockActual = stockActual;
     }
 
     

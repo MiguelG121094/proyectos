@@ -102,5 +102,38 @@ public class VentaDAO {
         }
         return lista;
     }
+    
+    
+    public int cantidadStock(int id_producto) {
+        int cantidadStock = 0;
+        String sql = "SELECT `cantidad_minima` FROM `producto` WHERE `id_producto` = " + id_producto;
+        con = cn.Conexion();
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                cantidadStock = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+        }
+
+        return cantidadStock;
+    }
+    
+    
+    public int descontarStock(Venta v) {
+        String sql = "update producto set cantidad_minima=? where id_producto=?";
+        try {
+            con = cn.Conexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, v.getStockActual());
+            ps.setInt(2, v.getId_producto());
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+        }
+        return r;
+    }
 
 }

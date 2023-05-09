@@ -82,7 +82,7 @@ public class validar extends HttpServlet {
         if (accion.equalsIgnoreCase("salir")) {
             request.getSession().removeAttribute("Ingresar");
             request.getSession().invalidate();
-            request.getRequestDispatcher("index.jsp").forward(request, response);
+            response.sendRedirect("index.jsp");
         }else{
             //request.getRequestDispatcher("index.jsp").forward(request, response);
         }

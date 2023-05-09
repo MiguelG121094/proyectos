@@ -37,8 +37,18 @@
                         </div>
                         <button id="btnIngresar" type="submit" name="accion" value="Ingresar" class="btn btn-primary btn-block">Ingresar</button>
                     </form>
-                    <c:if test="${mensaje == 0}">
-                        <div id="mensaje" class="alert alert-danger" style="text-align: center" role="alert">
+                    
+                </div>
+                <div class="form-group">
+                    <a href="manualUsuario/manual_de_usuario.pdf" target="_blank" style="float: right;">Manual de usuario</a>
+                </div>
+            </div>
+        </div>
+        
+                    
+        
+        <c:if test="${mensaje == 0}">
+                        <div id="mensaje" class="alert alert-danger" style="position:absolute; top: 10px; right: 10px;" role="alert">
                         Usuario o contraseña incorrecta
                         <button type="button" style="border: none; float:right; display:inline-block; padding:0px 5px;" class="btn btn-outline-danger btn-close" data-bs-dismiss="alert" aria-label="Close"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a></button>
                     </div>
@@ -46,9 +56,6 @@
                         <script>
                             setTimeout("document.getElementById('mensaje').style.visibility='hidden'",5000);
                         </script>
-                </div>
-            </div>
-        </div>
                         
                         
                         

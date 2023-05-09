@@ -57,6 +57,7 @@ public class Controlador extends HttpServlet {
     int cant;
     int subTotal;
     int totalPagar;
+    int cantStock;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,7 +71,7 @@ public class Controlador extends HttpServlet {
                     request.setAttribute("listaVenta", lista);
                     break;
             }
-            request.getRequestDispatcher("MenuPrincipal.jsp").forward(request, response);
+            request.getRequestDispatcher("MenuPrincipal.jsp");
         }
 
         if (menu.equals("Empleado")) {
@@ -87,6 +88,8 @@ public class Controlador extends HttpServlet {
                     String telefono = request.getParameter("txttelefono");
                     String usuario = request.getParameter("txtusuario");
                     String clave = request.getParameter("txtclave");
+                    String claveConfir = request.getParameter("txtclaveConfirm");
+                    if (claveConfir.equalsIgnoreCase(clave)) {
                     em.setNombre(nombre);
                     em.setApellido(apellido);
                     em.setCi(cedula);
@@ -95,8 +98,13 @@ public class Controlador extends HttpServlet {
                     em.setUsuario(usuario);
                     em.setClave(clave);
                     edao.insertar(em);
-
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    }else{
+                    request.setAttribute("mensaje", 2);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    }
+                    
 
                     break;
                 case "Editar":
@@ -114,6 +122,8 @@ public class Controlador extends HttpServlet {
                     String telefono1 = request.getParameter("txttelefono");
                     String usuario1 = request.getParameter("txtusuario");
                     String clave1 = request.getParameter("txtclave");
+                    String claveConfir1 = request.getParameter("txtclaveConfirm");
+                    if (claveConfir1.equalsIgnoreCase(clave1)) {
                     em.setNombre(nombre1);
                     em.setApellido(apellido1);
                     em.setCi(cedula1);
@@ -123,13 +133,24 @@ public class Controlador extends HttpServlet {
                     em.setClave(clave1);
                     em.setId(id_em);
                     edao.editar(em);
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    }else{
+                    request.setAttribute("mensaje", 2);
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    }
+                    
 
                     break;
                 case "Eliminar":
                     id_em = Integer.parseInt(request.getParameter("id"));
                     edao.borrar(id_em);
+                    request.setAttribute("mensaje", 1);
                     request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+                    break;
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Empleado&accion=Listar").forward(request, response);
+
                     break;
             }
             request.getRequestDispatcher("Empleado.jsp").forward(request, response);
@@ -156,6 +177,7 @@ public class Controlador extends HttpServlet {
                     c.setRuc(ruc);
                     cdao.insertar(c);
 
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar").forward(request, response);
 
                     break;
@@ -182,15 +204,22 @@ public class Controlador extends HttpServlet {
                     c.setRuc(ruc1);
                     c.setId(id_c);
                     cdao.editar(c);
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar").forward(request, response);
 
                     break;
                 case "Eliminar":
                     id_c = Integer.parseInt(request.getParameter("id"));
                     cdao.borrar(id_c);
+                    request.setAttribute("mensaje", 1);
                     request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar").forward(request, response);
                     break;
+                case "Cancelar":
+                    request.getRequestDispatcher("Controlador?menu=Cliente&accion=Listar").forward(request, response);
+
+                    break;
             }
+            
             request.getRequestDispatcher("Cliente.jsp").forward(request, response);
         }
 
@@ -216,6 +245,7 @@ public class Controlador extends HttpServlet {
                     p.setRuc(ruc);
                     pdao.insertar(p);
 
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Proveedor&accion=Listar").forward(request, response);
 
                     break;
@@ -242,12 +272,18 @@ public class Controlador extends HttpServlet {
                     p.setRuc(ruc1);
                     p.setId(id_p);
                     pdao.editar(p);
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Proveedor&accion=Listar").forward(request, response);
 
                     break;
                 case "Eliminar":
                     id_p = Integer.parseInt(request.getParameter("id"));
                     pdao.borrar(id_p);
+                    request.setAttribute("mensaje", 1);
+                    request.getRequestDispatcher("Controlador?menu=Proveedor&accion=Listar").forward(request, response);
+
+                    break;
+                case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=Proveedor&accion=Listar").forward(request, response);
 
                     break;
@@ -273,6 +309,7 @@ public class Controlador extends HttpServlet {
                     produc.setCant_minima(cant_minima);
                     producdao.insertar(produc);
 
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 
                     break;
@@ -295,12 +332,18 @@ public class Controlador extends HttpServlet {
                     produc.setCant_minima(cant_minima1);
                     produc.setId(id_produc);
                     producdao.editar(produc);
+                    request.setAttribute("mensaje", 0);
                     request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 
                     break;
                 case "Eliminar":
                     id_produc = Integer.parseInt(request.getParameter("id"));
                     producdao.borrar(id_produc);
+                    request.setAttribute("mensaje", 1);
+                    request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
+
+                    break;
+                case "Cancelar":
                     request.getRequestDispatcher("Controlador?menu=Producto&accion=Listar").forward(request, response);
 
                     break;
@@ -316,6 +359,7 @@ public class Controlador extends HttpServlet {
                         listaVenta.removeAll(listaVenta);
                         totalPagar = 0;
                         id_em = em.getId();
+                        item = 0;
                     }
                     List lista = cdao.listar();
                     request.setAttribute("cliente", lista);
@@ -372,6 +416,15 @@ public class Controlador extends HttpServlet {
                     v.setPrecio(precio);
                     v.setCantidad(cant);
                     v.setSubTotal(subTotal);
+                    
+                    for (int i = 0; i < listaVenta.size(); i++) {
+                        if (listaVenta.get(i).getDescripcion().equalsIgnoreCase(v.getDescripcion())) {
+                            v.setCantidad(listaVenta.get(i).getCantidad() + v.getCantidad());
+                            v.setSubTotal(v.getCantidad() * v.getPrecio());
+                            listaVenta.remove(i);
+                        }
+                    }
+                    
                     listaVenta.add(v);
                     request.setAttribute("lista", listaVenta);
 
@@ -379,7 +432,6 @@ public class Controlador extends HttpServlet {
                     if (id_c == 0) {
                         c = cdao.listar_id(id_c = 1);
                     }
-                    //c = cdao.listar_id(id_c = 1);
                     request.setAttribute("cli", c);
 
                     //obtener total a pagar
@@ -402,7 +454,7 @@ public class Controlador extends HttpServlet {
                     id_em = em.getId();
                     v.setId_empleado(id_em);
                     v.setEstado("A");
-                    vdao.guardarCab_Venta(v);
+                    
 
                     //Guardar Detalle venta
                     int idCab_venta = vdao.traerUltimo_id_venta();
@@ -412,18 +464,35 @@ public class Controlador extends HttpServlet {
                         v.setPrecio(listaVenta.get(i).getPrecio());
                         v.setCantidad(listaVenta.get(i).getCantidad());
                         v.setId_producto(listaVenta.get(i).getId_producto());
-                        vdao.guardarDet_Venta(v);
+                    //restar del Stock
+                    int cantEnStock = vdao.cantidadStock(listaVenta.get(i).getId_producto());
+                    int cantVendida = v.getCantidad();
+                    int restarStock = cantEnStock - cantVendida;
+                    
+                        if (cantEnStock > cantVendida) {
+                            v.setStockActual(restarStock);
+                            vdao.guardarDet_Venta(v);
+                            vdao.guardarCab_Venta(v);
+                            vdao.descontarStock(v);
+                            request.setAttribute("mensaje", 0);
+                        }else{
+                            request.setAttribute("mensaje", 1);
+                        }
                         
                     }
-                    request.setAttribute("mensaje", 0);
-                    request.getRequestDispatcher("Controlador?menu=RegistrarVenta&accion=ListarModal").forward(request, response);
+                    
+                    
+                    
+                    request.getRequestDispatcher("Controlador?menu=RegistrarVenta&accion=ListarModal&nuevaV=1").forward(request, response);
 
                     break;
-                case "Eliminar":
+                case "Eliminar":;
                     for (int i = 0; i < listaVenta.size(); i++) {
-                        if (listaVenta.get(i).getId_producto() == id_produc) {
+                        if (listaVenta.get(i).getItem()== Integer.parseInt(request.getParameter("item"))) {
+                            totalPagar = totalPagar - listaVenta.get(i).getSubTotal();
                             listaVenta.remove(i);
                         }
+                        
                     }
                     
                     //mantener lista

@@ -89,7 +89,7 @@
                 <div class="d-flex align-items-center justify-content-between small">
                     <div class="text-muted">Copyright &copy; Sistema Compra / Venta</div>
                     <div>
-                        <a href="#">Manual de usuario</a>
+                        <a href="manualUsuario/manual_de_usuario.pdf" target="_blank">Manual de usuario</a>
                     </div>
                 </div>
             </div>
