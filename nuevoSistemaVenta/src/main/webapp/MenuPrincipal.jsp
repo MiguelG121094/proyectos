@@ -15,8 +15,22 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/17ce7f89d9.js" crossorigin="anonymous"></script>
+        
+        <script src="bootstrap-4.0.0/jquery-3.7.0.js" type="text/javascript"></script>
+        
+        <!-- DataTables -->
+        <!--<link href="https://cdn.datatables.net/v/bs4/jq-3.6.0/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.css" rel="stylesheet"/>--> 
+         <link href="DataTables/datatables.min.css" rel="stylesheet" type="text/css"/>
+
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script> -->
+        <script src="DataTables/pdfmake-0.2.7/pdfmake.min.js" type="text/javascript"></script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script> -->
+        <script src="DataTables/pdfmake-0.2.7/vfs_fonts.js" type="text/javascript"></script>
+        <!-- <script src="https://cdn.datatables.net/v/bs4/jq-3.6.0/jszip-2.5.0/dt-1.13.4/b-2.3.6/b-colvis-2.3.6/b-html5-2.3.6/b-print-2.3.6/datatables.min.js"></script> -->
+        <script src="DataTables/datatables.min.js" type="text/javascript"></script>
+        <script src="DataTables/pdfmake-0.2.7/pdfmake.min.js" type="text/javascript"></script>
     </head>
     <body>
 
@@ -94,7 +108,7 @@
                             </div>
                             <div class=""><canvas width="100%" height="0"></canvas>
 
-                                <table class="table table-bordered table-striped">
+                                <table id="tablaVentasRealizadas" class="table table-bordered table-striped">
                                     <thead>
                                         <tr class="bg-dark">
                                             <th class="text-center text-light">Id. Venta</th>
@@ -140,8 +154,21 @@
 
 
 
+            <script>
 
-
+              $(document).ready(function(){
+              $('#tablaVentasRealizadas').DataTable();
+              })
+  
+              var table = new DataTable('#tablaVentasRealizadas', {
+                language: {
+                    url: "DataTables/es-ES.json",
+                },
+                });
+            </script>
+        
+        
+        
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>

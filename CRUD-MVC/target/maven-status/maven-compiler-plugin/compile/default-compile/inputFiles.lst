@@ -1,8 +1,9 @@
+C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Conexion\conexion_mysql.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Modelo\personaDAO.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\com\mycompany\crud\mvc\resources\JavaEE8Resource.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\com\mycompany\crud\mvc\JAXRSConfiguration.java
-C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Conexion\conexion.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Conexion\gbl.java
+C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Conexion\conexion_postgresql.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Controlador\ciudad1DTO.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Controlador\personaDTO.java
 C:\Users\Miguel\Documents\Formularios\CRUD-MVC\src\main\java\Modelo\ciudadDAO.java

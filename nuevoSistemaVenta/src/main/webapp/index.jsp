@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <!-- fondo -->
         <link href="img/fondo.css" rel="stylesheet" type="text/css"/>
     </head>

@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/17ce7f89d9.js" crossorigin="anonymous"></script>
     </head>
     <body>

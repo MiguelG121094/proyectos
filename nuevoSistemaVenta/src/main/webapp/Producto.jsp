@@ -12,8 +12,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
         <!-- Bootstrap -->
-        <link href="bootstrap/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="bootstrap-4.0.0/css/bootstrap.css" rel="stylesheet" type="text/css"/>
         <script src="https://kit.fontawesome.com/17ce7f89d9.js" crossorigin="anonymous"></script>
+        <link href="DataTables/datatables.min.css" rel="stylesheet" type="text/css"/>
+        <script src="DataTables/datatables.min.js" type="text/javascript"></script>
     </head>
     <body>
         
@@ -57,7 +59,7 @@
 
                 <!-- Tabla -->
                 <div class="col-sm-8">
-                    <table class="table table-hover table-bordered table-striped">
+                    <table id="tablaProductos" class="table table-hover table-bordered table-striped">
                         <thead>
                             <tr class="bg-dark">
                                 <th class="text-center text-light">Id</th>
@@ -104,7 +106,18 @@
                             </c:if>
         
         
-        
+        <script>
+
+              $(document).ready(function(){
+              $('#tablaProductos').DataTable();
+              })
+  
+              var table = new DataTable('#tablaProductos', {
+                language: {
+                    url: "DataTables/es-ES.json",
+                },
+                });
+        </script>
         
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
